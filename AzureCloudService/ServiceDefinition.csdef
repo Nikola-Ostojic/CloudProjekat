@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="AzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WebRole name="WebRole" vmsize="Standard_D1_v2">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="Endpoint2" endpointName="InputRequest_WebRole" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="InputRequest_WebRole" protocol="http" port="8903" />
+    </Endpoints>
+  </WebRole>
+  <WorkerRole name="ChangeRequestWorkerRole" vmsize="Standard_D1_v2">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="InputRequest1_ChangeRequest" protocol="tcp" port="8889" />
+      <InternalEndpoint name="InternalRequest" protocol="tcp" />
+    </Endpoints>
+  </WorkerRole>
+  <WorkerRole name="QueueRequestReceiverWorkerRole" vmsize="Standard_D1_v2">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="InputRequest_QueueRequest" protocol="tcp" port="8901" />
+    </Endpoints>
+  </WorkerRole>
+  <WorkerRole name="EntityHandlerBlueWorkerRole" vmsize="Standard_D1_v2">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionString_Autobus" />
+      <Setting name="DataConnectionString_Vozac" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="InputRequest_Blue" protocol="tcp" port="8951" />
+      <InternalEndpoint name="InternalRequest" protocol="tcp" />
+    </Endpoints>
+  </WorkerRole>
+  <WorkerRole name="EntityHandlerGreenWorkerRole" vmsize="Standard_D1_v2">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionString_Linija" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="InputRequest_Green" protocol="tcp" port="8950" />
+      <InternalEndpoint name="InternalRequest" protocol="tcp" />
+    </Endpoints>
+  </WorkerRole>
+</ServiceDefinition>
