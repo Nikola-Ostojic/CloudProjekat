@@ -8,4 +8,4 @@ With the addition of a console application, it is possible to change management 
 C# in Visual Studio 2017 that runs on Microsoft Azure.
 
 # Created By
-Nikola Ostojic on faculty course: 'Cloud computing in electroenergetics'.
+Nikola Ostojic on faculty course: "Cloud computing in power systems".
